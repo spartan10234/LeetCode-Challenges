@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 
+
 /**
  * TestingEnviroment
  */
@@ -20,10 +21,29 @@ public class TestingEnviroment {
 
     public static void main(String[] args) throws IOException {
 
-        // File path is passed as parameter
-        File file = new File("coding_qual_input.txt");
+        int n = 2;
+
+        ListNode nod1 = new ListNode(1);
+        ListNode nod2 = new ListNode(2);
+        ListNode nod3 = new ListNode(3);
+        ListNode nod4 = new ListNode(4);
+        ListNode nod5 = new ListNode(5);
+
+        nod1.next = nod2;
+        nod2.next = nod3;
+        nod3.next = nod4;
+        nod4.next = nod5;
+
+        removeNthFromEnd(nod1, n);
+
+
+        /* function "public static String decode" 
+        File path is passed as parameter*
+        /
+        /*File file = new File("coding_qual_input.txt");
         String message = decode(file);
         System.out.println(message);
+        */
 
         /*String s = "babad"; //"cbbd";
         System.out.println(longestPalindrome(s));
@@ -330,5 +350,47 @@ public class TestingEnviroment {
         return decodedMessage;
 
     }
+
+    /**
+     * Definition for singly-linked list.
+     * public class ListNode {
+     *     int val;
+     *     ListNode next;
+     *     ListNode() {}
+     *     ListNode(int val) { this.val = val; }
+     *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+     * }
+     */
+    public static ListNode removeNthFromEnd(ListNode head, int n) {
+        int totalNodes = 0; 
+        ListNode current = head;  
+        while (current != null) { //Find the nth node 
+            current = current.next;  
+            totalNodes++;
+        }  
+        if(totalNodes == 1 && n == 1){ //If ListNode is size 1 and n 1 then return empty node.
+            ListNode empty = new ListNode();
+            empty = null;
+            return empty;
+        }
+
+        int nthNode = (totalNodes-n);
+        int counter = 1;
+        ListNode newHead = head; 
+        
+        while (head != null){
+            //System.out.println("Counter: " + counter);
+            if(nthNode != counter){
+                head = head.next;
+            }
+            else{ //nthNode is found, and pointer needs to skip over it.
+                head.next = head.next.next;
+            }
+            counter ++;
+        }
+        return newHead;
+    }
+    
+    
 
 }
