@@ -21,6 +21,7 @@ public class TestingEnviroment {
 
     public static void main(String[] args) throws IOException {
 
+        //---Function "removeNthFromEnd"
         int n = 2;
 
         ListNode nod1 = new ListNode(1);
@@ -37,43 +38,39 @@ public class TestingEnviroment {
         removeNthFromEnd(nod1, n);
 
 
-        /* function "public static String decode" 
-        File path is passed as parameter*
-        /
+        /* ---Function "public static String decode"
+        File path is passed as parameter*/
+
+        /*---Funtion "decode" */
         /*File file = new File("coding_qual_input.txt");
         String message = decode(file);
         System.out.println(message);
         */
 
+        /*---Function "longestPalindrome" */
         /*String s = "babad"; //"cbbd";
         System.out.println(longestPalindrome(s));
         */
 
+        /*---Function "reverseWords"*/
         /*String reverseString = reverseWords("  hello world  ");
         System.out.println(reverseString);
         */
 
+        /*---Function "lengthOfLongestSubstring"*/
         /*int length = lengthOfLongestSubstring("pwwkew");
         System.out.println(length);
         */
 
-        /*
-        Boolean anagramTesting = new Boolean(null);
+        /*---Funtion "isAnagramCounting"*/
+        /*Boolean anagramTesting = new Boolean(null);
         anagramTesting = isAnagramCounting("MADAM CURIE", "RADIUM CAME");
         System.out.println(anagramTesting);
         */
     }
 
-    /*public List<User> disturbable(LocalTime now, List<User> users) {
-        
-    }
-    */
-    //SELECT house.BUYER_ID, price.PRICE FROM house RIGHT OUTER JOIN price ON house.HOUSE_ID=price.HOUSE_ID;
-    /*WHERE price.PRICE SUM > 100;*/
-
     private static int CHARACTER_RANGE= 256;
     public static boolean isAnagramCounting(String string1, String string2) {
-        System.out.println("In Method 'isAnagramCounting");
         if (string1.length() != string2.length()) {
             return false;
         }
@@ -87,7 +84,6 @@ public class TestingEnviroment {
             System.out.println(string2.charAt(i));
             count[string2.charAt(i)]--;
             System.out.println(count[i]);
-            //System.out.println(count[string2.charAt(i)]);
         }
         System.out.println(string2);
         for (int i = 0; i < CHARACTER_RANGE; i++) {
@@ -133,21 +129,17 @@ public class TestingEnviroment {
     public static String reverseWords(String s) {
         //Exapmple string "  hello world  "
         String trimmedStr = s.trim();
-        //Vector<String> newString = new Vector<String>();
+        
         Stack <String> wordStack = new Stack<String>();
 
         String wordCreation = "";
         int lengthOfString = trimmedStr.length() -1;
 
-        System.out.println("Trimmed string: " + trimmedStr);
-        System.out.println("Length of trimmed string: " + lengthOfString);
-
         while (lengthOfString >= 0) {
             if (lengthOfString == 0) {
                 wordCreation += wordStack;
             }
-            if (trimmedStr.charAt(lengthOfString) != ' ') {
-                System.out.println("Character: " + trimmedStr.charAt(lengthOfString));
+            if (trimmedStr.charAt(lengthOfString) != ' ') { //Adding each character that is not a space.
                 wordStack.push(Character.toString(trimmedStr.charAt(lengthOfString)));
                 lengthOfString --;
             }
@@ -155,15 +147,8 @@ public class TestingEnviroment {
                 //If there is a space and the stack is not empty then lets pop the stack and add it to our string variable
                  //"WordCreation"
                 if (trimmedStr.charAt(lengthOfString) == ' ' && !wordStack.isEmpty()) {
-                    
                     for(int i =0; i < wordStack.size(); i++){
-                        System.out.println("Stack size before pop: " + wordStack.size());
-                        System.out.print("Current Stack before pop: " + wordStack +"\n");
-                        System.out.print("Index i: " + i +"\n");
-                    
                         wordCreation += wordStack.pop();
-                        System.out.println("Stack elements afer pop: " + wordStack);
-                        System.out.println("String so far created: " + wordCreation);
                     }
                     wordCreation += " "; //Concatenate a space character after stack has been all popped (Removed)
                     lengthOfString --; //Continue to the next iteration
@@ -179,138 +164,39 @@ public class TestingEnviroment {
 
     public static String longestPalindrome(String s) {
         //Examples: s = "babad", s = "cbbd"
-        //s.trim();
-        char firstChar = ' '; //s.charAt(0);
+        char firstChar = ' '; 
         String biggestPalindrome = ""; 
         String lastPalindrome="";
         int i =1;
         int j=0;
         while (i < s.length()){
-            System.out.println(s.charAt(i));
             if (firstChar == s.charAt(i)) {
-                System.out.println("FirstChar: " +firstChar + " Char at i: " + s.charAt(i));
                 String tempString = "";
                 String reverseString = "";
-                tempString = s.substring(0, i +1);
-                System.out.println("Substring palindrome: "+ tempString);
-                //i++;
+                tempString = s.substring(0, i + 1);
+            
                 for(j= tempString.length() -1; j >=0; j--){
-                    System.out.println(" Palindrome reverse Char at i: " + tempString.charAt(j));
                     reverseString += tempString.charAt(j);
                 }
-                //System.out.println("Substring reverse: " + reverseString);
-                System.out.println("Palindrome String: '" + tempString + "' Reverse Palindrome String: " +reverseString);
-
-                if (tempString.equals(reverseString)) { //Previously: tempString == reverseString
-                    System.out.println("Found matching Palindrome");
-                    if(tempString.length() > biggestPalindrome.length()){ 
-                        //iF a palindrome bigger than the current was found then replace it.
-                        //lastPalindrome =biggestPalindrome;
+                //Found matching Palindrome
+                if (tempString.equals(reverseString)) { 
+                    if(tempString.length() > biggestPalindrome.length()){ //iF a palindrome bigger than the current was found then replace it.
                         biggestPalindrome = tempString;
                     }
-                    //biggestPalindrome = tempString;
                     i++;
                 }
-                else{
-                    System.out.println("Palindrome pattern is not equal.");
+                else{ //Palindrome pattern is not equal. Continue to next iteration.
                     i++;
                 }
                 
             }
-            else{
-                System.out.println("Did not find matching palindrome. Adding 1 to the counter");
+            else{ //Did not find matching palindrome. Adding 1 to the counter
                 i++;
             }
         }
         System.out.println("Returning Palindrome: ");
         return biggestPalindrome;
     }
-
-    /* public static String decode(File message_file)throws IOException{//String[] message_file)throws IOException{
-        // File path is passed as parameter
-       // File file = new File("coding_qual_input.txt");
-
-        //InputStreamReader reader = new InputStreamReader(System.in, StandardCharsets.UTF_8);
-        //BufferedReader in = new BufferedReader(reader);
-
-        //BufferedReader in = new BufferedReader(new FileReader(file));
-        BufferedReader in = new BufferedReader(new FileReader(message_file));
-        String line = in.readLine();
-        
-        HashMap<Integer, String> hashMap = new HashMap<>();
-
-        while (line != null) {
-            // Array of string type to store input
-            String[] strLine;
-            // Reading the input line as a string, and splitting based on space delimeter
-            strLine = line.split(" ");
-            //strLine = in.readLine().split(" ");
-           // System.out.println("line: " + strLine[0] + strLine[1]);
-            hashMap.put(Integer.parseInt(strLine[0]),strLine[1]);
-            line = in.readLine();
-           
-            //hashMap.put(Integer.parseInt(strLine[0]), strLine[1]);
-        }
-        in.close();
-        //Sorting hashmap
-        ArrayList<Integer> sortedKeys = new ArrayList<>(hashMap.keySet());
-        Collections.sort(sortedKeys);
-
-        System.out.println("Array List size: " + sortedKeys.size());
- 
-        // Display the TreeMap which is naturally sorted
-        /*for (int x : sortedKeys){
-            System.out.println("Key = " + x + ", Value = " + hashMap.get(x));
-        }
-        */
-        //Print out first Key Value
-        /*System.out.println("Line: " + sortedKeys.get(0));
-        String decodedMessage = hashMap.get(1)  + " ";
-
-        int keyNumber = 1;
-        int lineNumber = 1;
-    
-            while (keyNumber < hashMap.size()) {
-                keyNumber = keyNumber + lineNumber + 1;
-                lineNumber = lineNumber + 1;
-                System.out.println("Key number " + keyNumber);
-                System.out.println("Line number " + lineNumber + "\n");
-                // Getting element at index
-                //System.out.println("Array value: " + sortedKeys.get(keyNumber -1));
-                //System.out.println("hashMap Value: " + hashMap.get(keyNumber));
-                if (keyNumber <= hashMap.size()){
-                    decodedMessage += hashMap.get(keyNumber ) + " ";
-                }
-                
-            }   
-        
-        /*while (keyNumber < sortedKeys.size()) {
-            keyNumber = keyNumber + lineNumber + 1;
-            System.out.println("Key number " + keyNumber);
-            // Getting element at index
-            System.out.println("Array value: " + sortedKeys.get(keyNumber -1));
-            System.out.println("hashMap Value: " + hashMap.get(keyNumber));
-            decodedMessage += hashMap.get(keyNumber ) + " ";
-            lineNumber = lineNumber + 1;
-            System.out.println("Line number " + lineNumber + "\n");
-        }
-        */
-        /*System.out.println(decodedMessage.trim());
-        return decodedMessage;
-
-    } */
-
-    // Function to sort a HashMap by "Key".
-    /*public static void sortbykey(){
-        ArrayList<String> sortedKeys = new ArrayList<String>(map.keySet());
- 
-        Collections.sort(sortedKeys);
- 
-        // Display the TreeMap which is naturally sorted
-        for (String x : sortedKeys)
-            System.out.println("Key = " + x
-                               + ", Value = " + map.get(x));
-    }*/
 
     public static String decode(File message_file)throws IOException{
         BufferedReader in = new BufferedReader(new FileReader(message_file));
@@ -390,7 +276,6 @@ public class TestingEnviroment {
         }
         return newHead;
     }
-    
     
 
 }
